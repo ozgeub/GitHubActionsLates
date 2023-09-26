@@ -2,12 +2,12 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches: [ "master", "develop" ]
-  pull_request:
-    branches: [ "master" ]
+#  push:
+#    branches: [ "master", "develop" ]
+#  pull_request:
+#    branches: [ "master" ]
   schedule:
-     - cron: '40 10 * * *'
+     - cron: '50 10 * * *'
 
 jobs:
   build:
