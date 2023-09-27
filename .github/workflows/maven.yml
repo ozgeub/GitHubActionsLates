@@ -42,6 +42,14 @@ jobs:
       run: |
         aws sts get-caller-identity
 
+    - name: Restore cached Primes
+      id: cache-primes-restore
+      uses: actions/cache/restore@v3
+      with:
+        path: |
+          terraform.tfstate*
+        key: ${{ runner.os }}-state
+        
     - name: Execute terraform scripts to launch S3 bucket
       run: |
         terraform init
@@ -53,4 +61,5 @@ jobs:
       with:
         path: |
           terraform.tfstate*
-        key: ${{ runner.os }}-state  
+        key: ${{ runner.os }}-state        
+        
