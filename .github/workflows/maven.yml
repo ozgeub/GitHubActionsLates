@@ -44,7 +44,9 @@ jobs:
         context: .
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/planview:latest 
         
-  deploy:   
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
     - name: Downloading manifests from GitHub
       uses: actions/download-artifact@v3
       with:
@@ -69,5 +71,4 @@ jobs:
        last_ssh: |
         cd /tmp/Docker/
         kubectl apply -f .
-        
         
