@@ -56,6 +56,6 @@ jobs:
        scp: |
         'k8smanifests/' => /tmp/Docker/
        last_ssh: |
-        cd /tmp/Docker/k8smanifests/
+        cd /tmp/Docker/
         kubectl apply -f .
         
