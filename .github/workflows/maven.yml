@@ -27,6 +27,11 @@ jobs:
       with:
        name: buildArtifact
        path: target/*.war
+    - name: Storing manifests in GitHub
+      uses: actions/upload-artifact@v3
+      with:
+       name: k8smanifestsArtifacts
+       path: k8smanifests/*
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
@@ -38,7 +43,13 @@ jobs:
         push: true
         context: .
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/planview:latest 
-      
+        
+  deploy:   
+    - name: Downloading manifests from GitHub
+      uses: actions/download-artifact@v3
+      with:
+       name: k8smanifestsArtifacts
+
     - name: Deploy Application using SSH
       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
       env:
@@ -58,4 +69,5 @@ jobs:
        last_ssh: |
         cd /tmp/Docker/
         kubectl apply -f .
+        
         
